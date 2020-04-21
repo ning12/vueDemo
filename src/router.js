@@ -1,26 +1,57 @@
 import Vue from "vue";
 import Router from "vue-router";
+import LocalStorage from './api/local-storage';
 import Home from "./views/Home.vue";
+import Login from "./views/Login.vue";
+import Index from "./views/Index.vue";
+import indexContent from "./router/indexContent";
 
 Vue.use(Router);
 
-export default new Router({
-  mode: "history",
+const router = new Router({
+  mode: "hash",
   base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      name: "Login",
+      component: Login
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+      path: "/index",
+      name: "Index",
+      component: Index,
+      redirect: '/index/indexs',
+      children: [
+        ...indexContent
+      ]
+    },
+    {
+      path: "/home",
+      name: "Home",
+      component: Home,
+      meta: {
+        requireLogin: true
+      }
     }
   ]
 });
+router.beforeEach((to, from, next) => {
+  if(to.meta.requireLogin) {
+    if(LocalStorage.getItem('password')) {
+      next();
+    }
+    else {
+      alert('信息过期，请重新登录!');
+      next({
+        path: '/',
+        query: {redirect: to.fullPath}
+      });
+    }
+  }
+  else {
+    next();
+  }
+});
+
+export default router;

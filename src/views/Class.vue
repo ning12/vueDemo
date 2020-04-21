@@ -1,12 +1,14 @@
 <template>
-  <hello-world />
+  <div class="app-page">
+   HelloClass
+  </div>
 </template>
 
 <script>
   import HelloWorld from '../components/HelloWorld'
 
   export default {
-    name: 'Home',
+    name: 'Index',
 
     components: {
       HelloWorld,

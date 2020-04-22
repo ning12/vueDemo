@@ -39,7 +39,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar style="display:flexd" color="#fff">
+    <v-toolbar style="position:fixed;width:100%;z-index:111" color="#fff">
       <v-app-bar-nav-icon color="#000" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <v-flex text-xs-center >
@@ -48,7 +48,7 @@
         </v-toolbar-title>
       </v-flex>
     </v-toolbar>
-    <v-content>
+    <v-content style="padding-top:56px;">
       <router-view/>
       <!-- <v-card>{{bottomNav}}</v-card> -->
     </v-content>

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-page" style="background: #F3F2F2;min-height: 100vh;">
+  <div class="app-page" style="min-height: 100vh;">
     <v-container style="padding-bottom:56px!important">
       <v-flex>
         <v-carousel
@@ -48,7 +48,7 @@
       </v-container>
       <v-flex class="d-flex justify-space-between flex-row" style="height:2rem">
         <span>直播课</span>
-        <a href class="live-more">查看更多></a>
+        <a @click="goToMore('list')" class="live-more">查看更多></a>
       </v-flex>
       <v-flex class="d-flex justify-space-between flex-wrap ml-0">
         <v-card class="mx-auto" width="48%" v-for="(item,i) in live" :key="i">
@@ -76,7 +76,7 @@
           <span class="min-time">{{min}}</span>:
           <span class="sec-time">{{sec}}</span>
         </span>
-        <a href class="live-more">查看更多></a>
+        <a @click="goToCollage('collageList')" class="live-more">查看更多></a>
       </v-flex>
       <v-flex class="mt-3 mb-3">
         <swiper ref="mySwiper1" :options="swiperOptions">
@@ -89,32 +89,18 @@
                 <span style="color:red">￥{{item.nowPrice}}</span>
                 <del class="ml-2" style="font-size:.7rem;">￥{{item.oldPrice}}</del>
               </v-flex>
-              <v-flex class="d-flex pl-1">
-                <v-row>
+              <v-flex class="d-flex pl-1  justify-space-between">
+                <v-row class="d-flex justify-space-between">
                   <v-col >
                     <v-progress-linear v-model="valueDeterminate" color="pink" class="mr-2"></v-progress-linear>
                   </v-col>
-                  <v-col class="pb-0 pt-0">
+                  <v-col class="pb-0 pt-0 text-center">
                     <span style="font-size:.8rem">已抢40%</span>
                   </v-col>
                 </v-row>
-                
-                
               </v-flex>
             </v-card>
           </swiper-slide>
-          <!-- <swiper-slide>
-            <img src="./../assets/images/pin2.jpg" alt width="100%" />
-          </swiper-slide>
-          <swiper-slide>
-            <img src="./../assets/images/pin3.jpg" alt width="100%" />
-          </swiper-slide>
-          <swiper-slide>
-            <img src="./../assets/images/pin1.png" alt width="100%" />
-          </swiper-slide>
-          <swiper-slide>
-            <img src="./../assets/images/pin2.jpg" alt width="100%" />
-          </swiper-slide> -->
         </swiper>
       </v-flex>
     </v-container>
@@ -187,11 +173,16 @@ export default {
   methods: {
     //倒计时
     countdown() {
-      const end = Date.parse(new Date("2020-04-22 04:10:20"));
+      const end = Date.parse(new Date("2020-04-30 04:10:20"));
       const now = Date.parse(new Date());
       const msec = end - now;
       let day = parseInt(msec / 1000 / 60 / 60 / 24);
-      let hr = parseInt((msec / 1000 / 60 / 60) % 24);
+      let hr = "";
+      if(day>0) {
+        hr = parseInt((msec / 1000 / 60 / 60) % 24)*day;
+      }else {
+         hr = parseInt((msec / 1000 / 60 / 60) % 24);
+      }
       let min = parseInt((msec / 1000 / 60) % 60);
       let sec = parseInt((msec / 1000) % 60);
       this.day = day;
@@ -202,6 +193,12 @@ export default {
       this._interval = setTimeout(function() {
         that.countdown();
       }, 1000);
+    },
+    goToMore(url) {
+      this.$router.push(`/back/${url}`)
+    },
+    goToCollage(url) {
+      this.$router.push(`/back/${url}`)
     }
   },
   //当离开页面时，清除倒计时

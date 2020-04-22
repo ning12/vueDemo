@@ -33,6 +33,33 @@ const router = new Router({
       meta: {
         requireLogin: true
       }
+    },
+    {
+      path: "/back",
+      name: "Back",
+      component: resolve => require(['@/components/Back.vue'], resolve),
+      redirect: '/back/list',
+      meta: {
+        requireLogin: true,
+        head: '返回按钮'
+      },
+      children: [{
+        path: "list",
+        meta: {
+          requireLogin: true,
+          head: '直播列表'
+        },
+        component: resolve =>require(['@/views/List.vue'],resolve)
+      },
+      {
+        path: "collageList",
+        meta: {
+          requireLogin: true,
+          head: '拼团列表'
+        },
+        component: resolve =>require(['@/views/CollageList.vue'],resolve)
+      }  
+    ]
     }
   ]
 });

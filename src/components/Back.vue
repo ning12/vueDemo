@@ -6,11 +6,11 @@
     </v-btn>
     <v-spacer></v-spacer>
     <v-flex>
-      <v-toolbar-title text-xs-center>{{$route.meta.head}}</v-toolbar-title>
+      <v-toolbar-title text-xs-left>{{$route.meta.head}}</v-toolbar-title>
     </v-flex>
   </v-toolbar>
   <v-divider></v-divider>
-  <v-content style="padding-top:56px;">
+  <v-content style="padding-top:64px;">
       <router-view/>
       <!-- hello -->
     </v-content>

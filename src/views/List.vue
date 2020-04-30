@@ -1,6 +1,6 @@
 <template>
   <v-flex>
-    <v-tabs v-model="tab" :grow="grow" background-color="#fff" >
+    <v-tabs v-model="tab" :grow="grow" background-color="#fff">
       <v-tabs-slider></v-tabs-slider>
       <v-tab>专升本</v-tab>
       <v-tab>教师招聘</v-tab>
@@ -81,6 +81,13 @@
         </v-container>
       </v-tab-item>
     </v-tabs>
+    <v-btn @click="upload" depressed>上传头像</v-btn>
+    <input type="file" id="upload" ref="upload" @change="changeimg" accept=".jpg, .jpeg, .png" />
+    <v-file-input
+    label="File input"
+    filled
+    prepend-icon="mdi-camera"
+  ></v-file-input>
   </v-flex>
 </template>
 
@@ -122,6 +129,18 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    upload() {
+      let uploadbtn = this.$refs.upload;
+      uploadbtn.click();
+    },
+    async changeimg(e) {
+      let formData = new FormData();
+      formData.append("file", e.target.files[0]);
+      // await myServiece.fun(formData);
+      console.log(e.target.files[0]);
+    }
   }
 };
 </script>
@@ -145,4 +164,14 @@ export default {
 .v-tab:before {
   background-color: #fff;
 }
+
+.v-card__subtitle {
+  line-height: 1.5;
+}
+
+// #upload {
+//   height: 0;
+//   width: 0;
+//   visibility: hidden;
+// }
 </style>

@@ -9,7 +9,7 @@ import indexContent from "./router/indexContent";
 Vue.use(Router);
 
 const router = new Router({
-  mode: "hash",
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
@@ -58,6 +58,14 @@ const router = new Router({
           head: '拼团列表'
         },
         component: resolve =>require(['@/views/CollageList.vue'],resolve)
+      },
+      {
+        path: "detail",
+        meta: {
+          requireLogin: true,
+          head: '课程详情'
+        },
+        component: resolve =>require(['@/views/Detail.vue'],resolve)
       }  
     ]
     }

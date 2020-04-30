@@ -1,7 +1,7 @@
 <!--app整体布局-->
 <template>
   <v-sheet>
-    <v-navigation-drawer  v-model="drawer" fixed  app>
+    <v-navigation-drawer  v-model="drawer" fixed  app style="z-index:1111">
       <br />
       <v-layout row wrap>
         <v-flex xs1></v-flex>
@@ -48,20 +48,20 @@
         </v-toolbar-title>
       </v-flex>
     </v-toolbar>
-    <v-content style="padding-top:56px;">
+    <v-content style="padding-top:64px;">
       <router-view/>
       <!-- <v-card>{{bottomNav}}</v-card> -->
     </v-content>
-    <v-footer class="pa-0" fixed height="56" text-center>
+    <v-footer class="pa-0" fixed  text-center>
       <v-bottom-navigation v-model="bottomNav" background-color="#fff" color="#3af" grow>
         <v-btn value="indexs" @click="goTo('indexs')">
           <span>首页</span>
-          <v-icon>mdi-history</v-icon>
+          <v-icon>home</v-icon>
         </v-btn>
 
         <v-btn value="work" @click="goTo('work')">
           <span>作业</span>
-          <v-icon>mdi-heart</v-icon>
+          <v-icon>note</v-icon>
         </v-btn>
 
         <v-btn value="class" @click="goTo('class')">
@@ -95,5 +95,8 @@ export default {
   }
 };
 </script>
-<style lang="less" scoped>
+<style lang="stylus" scoped>
+.v-list-item__title {
+  line-height: 1.2!important;
+}
 </style>

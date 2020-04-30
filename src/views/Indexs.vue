@@ -46,19 +46,19 @@
           </v-row>
         </v-flex>
       </v-container>
-      <v-flex class="d-flex justify-space-between flex-row" style="height:2rem">
+      <v-flex class="d-flex justify-space-between flex-row" >
         <span>直播课</span>
         <a @click="goToMore('list')" class="live-more">查看更多></a>
       </v-flex>
       <v-flex class="d-flex justify-space-between flex-wrap ml-0">
-        <v-card class="mx-auto" width="48%" v-for="(item,i) in live" :key="i">
+        <v-card class="mx-auto" width="48%" v-for="(item,i) in live" :key="i" @click="goToDetail()">
           <p class="text-justify" style>{{item.state}}</p>
           <div class="indexs-livetime">
-            <img src="./../assets/images/shijian.png" style="max-width:.9rem" />
+            <img src="./../assets/images/shijian.png" style="max-width:.9rem"/>
             {{item.time}}
           </div>
           <v-flex class="d-flex justify-center">
-            <v-avatar size="4rem" class="mr-3" v-for="(item1,ci) in item.src" :key="ci">
+            <v-avatar size="4rem"  v-for="(item1,ci) in item.src" :key="ci">
               <img :src="item1.url" alt="John" />
             </v-avatar>
           </v-flex>
@@ -67,9 +67,9 @@
       </v-flex>
       <v-flex
         class="d-flex justify-space-between flex-row mt-3"
-        style="hegiht:2rem;line-height:2rem"
+        style="hegiht:1rem;"
       >
-        <img style="max-width:7rem" src="./../assets/images/sekill.png" />
+        <img style="max-width:12rem" src="./../assets/images/sekill.png" />
         <span style="font-size:.6rem;">
           距离本场结束还有
           <span class="hour-time">{{hr}}</span>:
@@ -89,9 +89,9 @@
                 <span style="color:red">￥{{item.nowPrice}}</span>
                 <del class="ml-2" style="font-size:.7rem;">￥{{item.oldPrice}}</del>
               </v-flex>
-              <v-flex class="d-flex pl-1  justify-space-between">
+              <v-flex class="d-flex pl-1  justify-space-between" style="line-height:0">
                 <v-row class="d-flex justify-space-between">
-                  <v-col >
+                  <v-col class="pr-0">
                     <v-progress-linear v-model="valueDeterminate" color="pink" class="mr-2"></v-progress-linear>
                   </v-col>
                   <v-col class="pb-0 pt-0 text-center">
@@ -199,6 +199,9 @@ export default {
     },
     goToCollage(url) {
       this.$router.push(`/back/${url}`)
+    },
+    goToDetail() {
+      this.$router.push('/back/detail')
     }
   },
   //当离开页面时，清除倒计时
@@ -255,5 +258,8 @@ export default {
   overflow: hidden;
 text-overflow:ellipsis;
 white-space: nowrap;
+}
+.v-card__subtitle {
+  line-height: 1.5!important;
 }
 </style>

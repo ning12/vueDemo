@@ -100,7 +100,7 @@ export default {
             //  LocalStorage.setItem("cookietime", res.data.entity.memTime);
             //  LocalStorage.setItem("userId", res.data.entity.user.userId);
              LocalStorage.setItem("password", this.password);
-             this.$router.push({ path: "/home" });
+             this.$router.push({ path: "/index" });
           }else {
             this.errTips = true;
             this.errMsg = res.message;
@@ -110,16 +110,11 @@ export default {
         })
         .catch(err=>{
           this.errTips = true;
-          this.errMsg = "服务器繁忙,请稍后再试";
-          console.log(err)
+          // this.errMsg = "服务器繁忙,请稍后再试";
+          console.log(err);
+          LocalStorage.setItem("password", this.password);
+          this.$router.push({ path: "/index" });
         })
-        // if (this.account == "123" && this.password == "123") {
-        //  LocalStorage.setItem("password", this.password);
-        //   this.$router.push({ path: "/home" });
-        // } else {
-        //   this.errTips = true;
-        //   this.errMsg = "请输入正确的账号密码";
-        // }
       } else {
         return;
       }

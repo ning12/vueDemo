@@ -67,7 +67,7 @@
 </style>
 <script>
 import LocalStorage from '../api/local-storage';
-import QS from 'qs';
+import qs from 'qs';
 import {userLogin} from '../api/server'
 // 已全局引用axios,组件中直接使用this.$axios进行请求
 export default {
@@ -85,35 +85,29 @@ export default {
       // 全局引用的baseUrl,axios,get,postform.请求如:
       // this.$post('/xxx',data).then(res=>{}),err(err=>{})
       // console.log(apiDeviceDetail)
-      console.log(this.$axios)
-      console.log(this.$get)
-      console.log(this.$post)
-      console.log(this.$postform)
+      // console.log(this.$axios)
+      // console.log(this.$get)
+      // console.log(this.$post)
+      // console.log(this.$postform)
       if (this.$refs.form.validate()) {
         const data = {
           loginName: this.account,
           loginPwd: this.password,
         }
-        userLogin(data).then(res=>{
+        userLogin(qs.stringify(data)).then(res=>{
           console.log(res);
           if(res.success) {
-            //  LocalStorage.setItem("cookietime", res.data.entity.memTime);
-            //  LocalStorage.setItem("userId", res.data.entity.user.userId);
              LocalStorage.setItem("password", this.password);
              this.$router.push({ path: "/index" });
           }else {
             this.errTips = true;
             this.errMsg = res.message;
-            LocalStorage.setItem("password", this.password);
-            this.$router.push({ path: "/index" });
           }
         })
         .catch(err=>{
           this.errTips = true;
-          // this.errMsg = "服务器繁忙,请稍后再试";
+          this.errMsg = "服务器繁忙,请稍后再试";
           console.log(err);
-          LocalStorage.setItem("password", this.password);
-          this.$router.push({ path: "/index" });
         })
       } else {
         return;

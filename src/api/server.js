@@ -3,12 +3,14 @@ import { post, $delete, put } from "./utils";
 let baseUrl = ''
 if (process.env.NODE_ENV == 'development') {
   // baseUrl = 'http://192.168.0.139/openadmin/' 
-  baseUrl = 'http://127.0.0.1/openadmin'
+  // baseUrl = 'http://127.0.0.1/openadmin'
+  baseUrl = 'http://192.168.0.171/openadmin/'
   // baseUrl = 'http://www.haodaifujiaoyu.com/openadmin/' 
 
 } else if (process.env.NODE_ENV == 'production') {
   // baseUrl = 'http://192.168.0.139/openadmin/'
-  baseUrl = 'http://127.0.0.1/openadmin'
+  // baseUrl = 'http://127.0.0.1/openadmin'
+  baseUrl = 'http://192.168.0.171/openadmin/'
   // baseUrl = 'http://www.haodaifujiaoyu.com/openadmin/' 
 }
 // export {
